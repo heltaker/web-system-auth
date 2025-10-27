@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Manager - Web System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Data Manager</h1>
+    
+    <div class="toolbar">
+      <button onclick="showAddForm()">Add New Record</button>
+      <div class="search-box" style="flex: 1; max-width: 400px;">
+        <input type="text" id="search" placeholder="Search records..." oninput="filterTable()">
+      </div>
+    </div>
+    
+    <form id="add-form" class="hidden">
+      <h3 style="color: #667eea; margin-bottom: 15px;">Add New Record</h3>
+      <div class="form-group">
+        <label for="new-content">Content</label>
+        <input type="text" id="new-content" placeholder="Enter record content" required>
+      </div>
+      <button type="submit">Add Record</button>
+    </form>
+    
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Content</th>
+          <th style="width: 200px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="data-body">
+        <tr>
+          <td colspan="2" style="text-align: center; padding: 40px; color: #999;">
+            Loading...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div id="message"></div>
+    
+    <p style="text-align: center; margin-top: 30px;">
+      <a href="login.html" style="color: #667eea; text-decoration: none; font-weight: 600;">← Back to Login</a>
+    </p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

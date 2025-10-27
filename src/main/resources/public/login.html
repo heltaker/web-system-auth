@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Web System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="login">Username</label>
+        <input type="text" id="login" placeholder="Enter your username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+    <p class="link-text">Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+    
+    <form id="register-form" style="display:none;">
+      <h2 style="text-align: center; color: #667eea; margin-bottom: 20px;">Register</h2>
+      <div class="form-group">
+        <label for="reg-login">Username</label>
+        <input type="text" id="reg-login" placeholder="Choose a username" required>
+      </div>
+      <div class="form-group">
+        <label for="reg-password">Password</label>
+        <input type="password" id="reg-password" placeholder="Choose a password" required>
+      </div>
+      <button type="submit">Register</button>
+      <p class="link-text">Already have an account? <a href="login.html">Login here</a></p>
+    </form>
+    
+    <div id="message"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

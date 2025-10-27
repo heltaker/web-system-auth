@@ -1,19 +1,16 @@
 {
-  "name": "workspace",
+  "name": "web-system-auth",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@supabase/supabase-js": "^2.76.0",
-    "body-parser": "^2.2.0",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "md5": "^2.3.0"
+    "express": "^4.21.2",
+    "body-parser": "^1.20.2",
+    "md5": "^2.3.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "dotenv": "^16.4.5",
+    "tslib": "^2.6.3"
   }
 }

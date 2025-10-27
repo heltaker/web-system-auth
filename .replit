@@ -1,6 +1,47 @@
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "java-graalvm22.3"]
 [agent]
 expertMode = true
 
 [nix]
 channel = "stable-25_05"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 40069
+externalPort = 3000
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Server"
+
+[[workflows.workflow]]
+name = "Server"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export $(cat .env | xargs) && java -jar target/web-system-auth-1.0.0.jar"
+waitForPort = 5000
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["java", "-jar", "target/web-system-auth-1.0.0.jar"]
+build = ["mvn", "clean", "package", "-DskipTests"]
