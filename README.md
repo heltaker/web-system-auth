@@ -1,78 +1,77 @@
 # Web System Auth
 
-## Overview
+## Обзор
 
-A full-stack web application providing user authentication and data management capabilities. The system features user registration/login with MD5 password hashing and a CRUD interface for managing data records. Built with Spring Boot on the backend and vanilla JavaScript on the frontend, with Supabase as the cloud database provider.
+Полнофункциональное веб-приложение, обеспечивающее аутентификацию пользователей и управление данными. Система поддерживает регистрацию/вход пользователей с хешированием паролей по алгоритму MD5 и интерфейс CRUD для управления записями данных. Построено на Spring Boot на бэкенде и vanilla JavaScript на фронтенде, с Supabase в качестве поставщика облачной базы данных.
 
-## Recent Changes (October 27, 2025)
+## Последние изменения (27 октября 2025 г.)
 
-Successfully refactored from Node.js/Express to Java/Spring Boot:
-- Migrated backend from Express.js to Spring Boot 3.2.0
-- Preserved all authentication and CRUD functionality
-- Enhanced UI with modern CSS gradients and animations
-- Added comprehensive input validation and error handling
-- Fixed DOM loading issues in frontend
-- Configured for deployment with Maven build system
+Успешно переработано с Node.js/Express на Java/Spring Boot:
+- Миграция бэкэнда с Express.js на Spring Boot 3.2.0
+- Сохранение всех функций аутентификации и CRUD
+- Улучшенный интерфейс с современными CSS-градиентами и анимацией
+- Добавлена комплексная проверка вводимых данных и обработка ошибок
+- Исправлены проблемы с загрузкой DOM в фронтенде
+- Настроено для развертывания с помощью системы сборки Maven
 
-## User Preferences
+## Пользовательские настройки
 
-Preferred communication style: Simple, everyday language.
+Предпочтительный стиль общения: простой, повседневный язык.
 
-## System Architecture
+## Архитектура системы
 
-### Frontend Architecture
+### Архитектура фронтенда
 
-**Technology Stack**: Vanilla HTML, CSS, and JavaScript with no frontend framework dependencies.
+**Технологический стек**: Vanilla HTML, CSS и JavaScript без зависимостей от фронтенд-фреймворков.
 
-**Design Pattern**: Multi-page application (MPA) with three main views:
-- Landing page (index.html) - Welcome page with "Get Started" button
-- Authentication page (login.html) - Handles both login and registration with toggle
-- Data management page (data.html) - CRUD operations interface with search
+**Шаблон проектирования**: многостраничное приложение (MPA) с тремя основными видами:
+- Начальная страница (index.html) - страница приветствия с кнопкой "Get Started"
+- Страница аутентификации (login.html) - обрабатывает как вход, так и регистрацию с помощью переключателя
+- Страница управления данными (data.html) - интерфейс операций CRUD с поиском
 
-**State Management**: Client-side uses simple DOM manipulation and fetch API for server communication. No session persistence or token storage is implemented - authentication state is not maintained across page refreshes.
+**Управление состоянием**: На стороне клиента используется простая манипуляция DOM и API fetch для связи с сервером. Не реализовано сохранение сеанса или хранение токенов — состояние аутентификации не сохраняется при обновлении страницы.
 
-**UI/UX Approach**: Modern gradient-based design with purple theme (#667eea to #764ba2), centered container layout with smooth animations, responsive form validation with color-coded user feedback messages (red for errors, green for success), and enhanced accessibility.
+**Подход к UI/UX**: современный дизайн на основе градиента с фиолетовой темой (#667eea до #764ba2), центрированная компоновка контейнера с плавными анимациями, адаптивная проверка форм с цветными сообщениями обратной связи для пользователей (красный для ошибок, зеленый для успешного выполнения) и улучшенная доступность.
 
-**Validation & Error Handling**:
-- Client-side validation for empty fields
-- Minimum password length requirement (4 characters)
-- User-friendly error messages for all operations
-- Network error handling with graceful fallbacks
-- Auto-hiding messages after 5 seconds
+**Проверка и обработка ошибок**:
+- Клиентская проверка пустых полей
+- Минимальное требование к длине пароля (4 символа)
+- Удобные для пользователя сообщения об ошибках для всех операций
+- Обработка сетевых ошибок с плавными резервными вариантами
+- Автоматическое скрытие сообщений через 5 секунд
 
-### Backend Architecture
+### Архитектура бэкэнда
 
-**Framework**: Spring Boot 3.2.0 with embedded Tomcat server.
+**Фреймворк**: Spring Boot 3.2.0 со встроенным сервером Tomcat.
+**Конфигурация сервера**: 
+- Порт 5000 (настроен для среды Replit)
+- Хост 0.0.0.0 (требуется для веб-превью Replit)
+- Обслуживание статических файлов из `src/main/resources/public/`
+- CORS включен для всех источников
 
-**Server Configuration**: 
-- Port 5000 (configured for Replit environment)
-- Host 0.0.0.0 (required for Replit web preview)
-- Static file serving from `src/main/resources/public/`
-- CORS enabled for all origins
+**API Design**: RESTful endpoints с комплексной обработкой ошибок:
+- `POST /register` - Регистрация пользователя с проверкой и хешированием пароля MD5
+- `POST /login` - Аутентификация пользователя с проверкой учетных данных
+- `GET /data` - извлечение всех записей данных
+- `POST /data` - создание новой записи данных с проверкой
+- `PUT /data/{id}` - обновление существующей записи данных
+- `DELETE /data/{id}` - удаление записи данных
 
-**API Design**: RESTful endpoints with comprehensive error handling:
-- `POST /register` - User registration with validation and MD5 password hashing
-- `POST /login` - User authentication with credential verification
-- `GET /data` - Retrieve all data records
-- `POST /data` - Create new data record with validation
-- `PUT /data/{id}` - Update existing data record
-- `DELETE /data/{id}` - Delete data record
-
-**Project Structure**:
+**Структура проекта**:
 ```
 src/main/java/com/websystem/
-├── Application.java              # Spring Boot main application class
+├── Application.java              # Основной класс приложения Spring Boot
 ├── config/
-│   ├── SupabaseConfig.java      # Supabase connection configuration
-│   └── WebConfig.java           # CORS and static resource configuration
+│   ├── SupabaseConfig.java      # Конфигурация подключения Supabase
+│   └── WebConfig.java           # Конфигурация CORS и статических ресурсов
 ├── controller/
-│   ├── AuthController.java      # Authentication endpoints
+│   ├── AuthController.java      # Конечные точки аутентификации
 │   └── DataController.java      # CRUD endpoints
 ├── model/
-│   ├── User.java                # User entity model
-│   └── DataRecord.java          # Data record entity model
+│   ├── User.java                # Модель сущности пользователя
+│   └── DataRecord.java          # Модель сущности записи данных
 └── service/
-    └── SupabaseService.java     # Supabase REST API integration
+    └── SupabaseService.java     # Интеграция REST API Supabase
 ```
 
 **Security Considerations**: 
